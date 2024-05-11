@@ -1,0 +1,147 @@
+---
+title: Creating the Base
+sidebar:
+  order: 2
+---
+
+import { FileTree, Tabs, TabItem } from "@astrojs/starlight/components";
+
+## Using Environment Variables
+
+The Environment Variables are variables that are declared outside the execution process, which are declared with the structure of Key/Value.
+
+To use Environment Variables in your code, you will have to use a global variable named `process.env`.
+
+:::danger
+This is not a secure way to set your token, this is just an example of how to use Environment Variables.
+:::
+
+```js title="Using process.env variable" frame="terminal"
+console.log(
+  process.env.DISCORD_TOKEN
+); /* Output: undefined (Because it has not been set) */
+
+/*
+  This will set a new property on the env object
+  Which its name will be "DISCORD_TOKEN" and its value will be "XXXXXXXXXXXX.XXXXXXXXXXXX"
+*/
+process.env.DISCORD_TOKEN = "XXXXXXXXXXXX.XXXXXXXXXXXX";
+
+console.log(process.env.DISCORD_TOKEN); /* Output: XXXXXXXXXXXX.XXXXXXXXXXXX */
+```
+
+To store your token in a secure way, you will have to create a new file named `.env` in the root of your project.
+
+<FileTree>
+
+- discord-bot
+  - node_modules/
+  - **.env**
+  - package-lock.json
+  - package.json
+
+</FileTree>
+
+```bash title=".env" frame="code"
+DISCORD_TOKEN = "XXXXXXXXXXXX.XXXXXXXXXXXX" # Your bot token
+```
+
+:::danger
+The `.env` file must always be kept private, because it is where we store all our secret variables.
+
+If you use git, be sure to ignore this file before uploading it to GitHub.
+
+```text title=".gitignore" frame="code"
+.env
+```
+
+:::
+
+## Loading Environment Variables
+
+To load the Environment Variables, you will have to use a dependency named `dotenv`.
+
+```bash title="Installing Dotenv" frame="terminal"
+npm install dotenv
+```
+
+This dependency will load all the Environment Variables from your `.env` file.
+
+```js title="Using Dotenv" frame="terminal"
+console.log(
+  process.env.DISCORD_TOKEN
+); /* Output: undefined (Because it has not been loaded) */
+
+/*
+  This will load the environment variables stored in our .env file
+  Make sure you have this function at the top of your main file
+*/
+require("dotenv").config();
+
+console.log(process.env.DISCORD_TOKEN); /* Output: XXXXXXXXXXXX.XXXXXXXXXXXX */
+```
+
+## Creating the Main File
+
+To create your bot base, you will have to create a new file named `index.js`.
+
+<FileTree>
+
+- discord-bot
+  - node_modules/
+  - .env
+  - **index.js** Main file
+  - package-lock.json
+  - package.json
+
+</FileTree>
+
+```js title="index.js" frame="code" "IMPORTANT" "auth: process.env.DISCORD_TOKEN"
+/* Loading Environment Variables */
+require("dotenv").config();
+
+/* Importing the classes we are going to use */
+const { Client } = require("oceanic.js");
+
+/*
+  Creating the client instance
+
+  IMPORTANT: In the "auth" option, we must put the "Bot" prefix before the token, as it appears in the example
+  If in the value of the "DISCORD_TOKEN" Environment Variable you already have the "Bot" prefix, you can put it as auth: process.env.DISCORD_TOKEN directly
+*/
+const client = new Client({
+  auth: `Bot ${process.env.DISCORD_TOKEN}`,
+  gateway: {
+    intents: ["GUILDS"] /* For now, you will use the GUILDS intent */,
+  },
+});
+
+/* Connect the bot to Discord */
+client.connect();
+
+/*
+  We listen to the "Ready" event
+  When the bot is ready, it will send a message to the console
+*/
+client.on("ready", () => {
+  console.log(`${client.user.username} has been connected to Discord!`);
+});
+
+/*
+  We listen to the "Error" event
+  If there is no event for errors, it may cause an UncaughtError to be thrown, causing the process to die
+*/
+client.on("error", (error) => {
+  console.error(error);
+});
+```
+
+:::note
+Execute the `node index.js` command in your terminal to start your bot process.
+
+```bash title="Initializing your bot process" frame="terminal"
+node index.js # Expected Output: Guide Bot has been connected to Discord!
+```
+
+If a message similar to `[YOUR_BOT_NAME] has been connected to Discord!` appears in the terminal, it means that your bot has been initialized without problems.
+:::
