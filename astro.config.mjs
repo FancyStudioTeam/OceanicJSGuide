@@ -12,6 +12,7 @@ export default defineConfig({
       },
       social: {
         discord: "https://discord.gg/xZ4AhdYrf9",
+        github: "https://github.com/LonelyDeathVGX/OceanicJSGuide",
       },
       sidebar: [
         {
