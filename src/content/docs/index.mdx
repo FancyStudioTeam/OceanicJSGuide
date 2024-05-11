@@ -1,0 +1,37 @@
+---
+title: Oceanic Guide
+template: splash
+hero:
+  tagline: A Node.js library for interfacing with Discord
+  image:
+    file: ../../assets/Iso.svg
+  actions:
+    - text: Introduction
+      link: /home/introduction/
+      icon: right-arrow
+      variant: primary
+---
+
+## Example Discord Bot
+
+```js title="index.js" frame="code"
+require("dotenv").config();
+
+const { Client } = require("oceanic.js");
+const client = new Client({
+  auth: `Bot ${process.env.DISCORD_TOKEN}`,
+  gateway: {
+    intents: ["GUILDS"],
+  },
+});
+
+client.connect();
+
+client.on("ready", () => {
+  console.log(`${client.user.username} has been connected`);
+});
+
+client.on("error", (error) => {
+  console.error(error);
+});
+```
