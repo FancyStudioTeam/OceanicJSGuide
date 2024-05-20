@@ -43,5 +43,6 @@ export default defineConfig({
         ThemeProvider: undefined,
       },
     }),
+    tailwind(),
   ],
 });
