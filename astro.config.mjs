@@ -1,6 +1,8 @@
 import starlight from "@astrojs/starlight";
+import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
 
+// https://astro.build/config
 export default defineConfig({
   integrations: [
     starlight({
@@ -12,7 +14,7 @@ export default defineConfig({
       },
       social: {
         discord: "https://discord.gg/xZ4AhdYrf9",
-        github: "https://github.com/FancyStudioTeam/OceanicJSGuide",
+        github: "https://github.com/LonelyDeathVGX/OceanicJSGuide",
       },
       sidebar: [
         {
