@@ -2,7 +2,7 @@
 title: Oceanic Guide
 template: splash
 hero:
-  tagline: A Node.js library for interfacing with Discord
+  tagline: A Node.js compendium for seamless interaction with Discord.
   image:
     file: ../../assets/Iso.svg
   actions:
@@ -42,7 +42,7 @@ const client = new Client({
 client.connect();
 
 client.on("ready", () => {
-  console.log(`${client.user.username} has been connected`);
+  console.log(`${client.user.username} has been connected to Discord!`);
 });
 
 client.on("error", (error) => {
