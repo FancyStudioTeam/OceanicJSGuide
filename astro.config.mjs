@@ -7,6 +7,15 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Oceanic Guide",
+      defaultLocale: 'en',
+      locales: {
+        en: {
+          label: 'English',
+        },
+        es: {
+          label: 'Español',
+        },
+      },
       description: "A NodeJS library for interfacing with Discord",
       logo: {
         src: "./src/assets/Iso.svg",
