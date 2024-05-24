@@ -7,15 +7,15 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Oceanic Guide",
-      defaultLocale: 'root',
+      defaultLocale: "root",
       locales: {
         root: {
-          label: 'English',
-          lang: 'en',
+          label: "English",
+          lang: "en",
         },
         es: {
-          label: 'Español',
-          lang: 'es',
+          label: "Español",
+          lang: "es",
         },
       },
       description: "A NodeJS library for interfacing with Discord",

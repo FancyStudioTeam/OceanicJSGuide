@@ -18,7 +18,7 @@ This is not a secure way to set your token, this is just an example of how to us
 
 ```js title="Using process.env variable" frame="terminal"
 console.log(
-  process.env.DISCORD_TOKEN
+  process.env.DISCORD_TOKEN,
 ); /* Output: undefined (Because it has not been set) */
 
 /*
@@ -69,7 +69,7 @@ This dependency will load all the Environment Variables from your `.env` file.
 
 ```js title="Using Dotenv" frame="terminal"
 console.log(
-  process.env.DISCORD_TOKEN
+  process.env.DISCORD_TOKEN,
 ); /* Output: undefined (Because it has not been loaded) */
 
 /*

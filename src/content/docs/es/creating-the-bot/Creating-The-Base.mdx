@@ -18,7 +18,7 @@ Esta no es una forma segura de establecer tu token, esto es solo un ejemplo de c
 
 ```js title="Usando la variable process.env" frame="terminal"
 console.log(
-  process.env.DISCORD_TOKEN
+  process.env.DISCORD_TOKEN,
 ); /* Salida: undefined (Porque no ha sido establecido) */
 
 /*
@@ -69,7 +69,7 @@ Esta dependencia cargará todas las Variables de Entorno desde tu archivo `.env`
 
 ```js title="Usando Dotenv" frame="terminal"
 console.log(
-  process.env.DISCORD_TOKEN
+  process.env.DISCORD_TOKEN,
 ); /* Salida: undefined (Porque no ha sido cargado) */
 
 /*
