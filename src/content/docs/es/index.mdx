@@ -16,10 +16,10 @@ import { Card, CardGrid } from "@astrojs/starlight/components";
 
 <CardGrid>
   <Card title="Fácil de Usar" icon="approve-check-circle">
-    Oceanic.js es una biblioteca fácil de usar para tus aplicaciones de Discord.
+    Oceanic.js es una biblioteca fácil de usar para tus Aplicaciones de Discord
   </Card>
   <Card title="Últimas actualizaciones de Discord" icon="rocket">
-    Oceanic.js es una biblioteca que se mantiene actualizada con las últimas actualizaciones de la API de Discord.
+    Oceanic.js es una biblioteca que se mantiene actualizada con las últimas actualizaciones de la API de Discord
   </Card>
 </CardGrid>
 
@@ -39,7 +39,7 @@ const client = new Client({
 client.connect();
 
 client.on("ready", () => {
-  console.log(`${client.user.username} se ha conectado a Discord!`);
+  console.log(`¡${client.user.username} se ha conectado a Discord!`);
 });
 
 client.on("error", (error) => {
