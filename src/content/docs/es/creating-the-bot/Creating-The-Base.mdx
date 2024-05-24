@@ -6,7 +6,7 @@ sidebar:
 
 import { FileTree, Tabs, TabItem } from "@astrojs/starlight/components";
 
-## Uso de Variables de Entorno
+## Usando Variables de Entorno
 
 Las Variables de Entorno son variables que se declaran fuera del proceso de ejecución, las cuales se declaran con la estructura de Clave/Valor.
 
@@ -16,7 +16,7 @@ Para usar Variables de Entorno en tu código, tendrás que utilizar una variable
 Esta no es una forma segura de establecer tu token, esto es solo un ejemplo de cómo usar Variables de Entorno.
 :::
 
-```js title="Uso de la variable process.env" frame="terminal"
+```js title="Usando la variable process.env" frame="terminal"
 console.log(
   process.env.DISCORD_TOKEN
 ); /* Salida: undefined (Porque no ha sido establecido) */
@@ -140,7 +140,7 @@ client.on("error", (error) => {
 Ejecuta el comando `node index.js` en tu terminal para iniciar el proceso de tu bot.
 
 ```bash title="Iniciando el proceso de tu bot" frame="terminal"
-node index.js # Salida esperada: Guide Bot se ha conectado a Discord!
+node index.js # Salida Esperada: Guide Bot se ha conectado a Discord!
 ```
 
 Si aparece un mensaje similar a `[NOMBRE_DE_TU_BOT] se ha conectado a Discord!` en la terminal, significa que tu bot se ha inicializado sin problemas.
