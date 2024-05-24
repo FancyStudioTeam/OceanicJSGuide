@@ -6,7 +6,7 @@ sidebar:
 
 import { Steps, FileTree } from "@astrojs/starlight/components";
 
-## Instalación de Node.js
+## Instalando Node.js
 
 :::caution
 Oceanic.js requiere la versión `18.13.0` o superior de Node.js.
@@ -15,7 +15,7 @@ Oceanic.js requiere la versión `18.13.0` o superior de Node.js.
 :::note
 Si ya tienes Node.js con una versión compatible, puedes omitir el paso de instalación.
 
-```bash title="Verificando tu versión de Node.js" frame="terminal"
+```bash title="Comprobando tu versión de Node.js" frame="terminal"
 node -v # Salida: v20.13.1 (Depende de tu versión de Node.js)
 ```
 
@@ -33,7 +33,7 @@ Para instalar Node.js, tendrás que seguir estos pasos:
 
 3. Sigue las instrucciones del instalador de Node.js
 
-4. **(OPCIONAL)** Si tienes una terminal abierta, reiníciala y ejecuta el comando `node -v` para verificar que Node.js se haya instalado con una versión compatible
+4. **(OPCIONAL)** Si tienes una terminal abierta, reiníciala y ejecuta el comando `node -v` para comprobar que Node.js se ha instalado con una versión compatible
 
 </Steps>
 
@@ -62,12 +62,12 @@ Para instalar un Editor de Código, tendrás que seguir estos pasos:
 Para crear tu bot, tendrás que crear una nueva carpeta llamada `discord-bot` (o cualquier otro nombre) en tu Escritorio.
 
 <FileTree>
-- Escritorio
+- Desktop
   - **discord-bot/**
 
 </FileTree>
 
-## Configuración de tu Proyecto
+## Configurando tu Proyecto
 
 Una vez que hayas creado la carpeta, tendrás que abrir la carpeta con tu Editor de Código.
 
@@ -90,11 +90,11 @@ npm init -y # Esto creará un nuevo archivo llamado package.json
 
 Puedes aprender más sobre el archivo `package.json` en la <a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-json" target="_blank">Documentación de NPM.</a>
 
-## Instalación de Oceanic.js
+## Instalando Oceanic.js
 
 Una vez que hayas inicializado el archivo `package.json`, tendrás que instalar `oceanic.js`.
 
-```bash title="Instalando Oceanic.js" frame="terminal" "No Voice"
+```bash title="Instalando Oceanic.js" frame="terminal" "sin API de Voz"
 # Soporte sin API de Voz
 npm install oceanic.js --omit=optional
 
