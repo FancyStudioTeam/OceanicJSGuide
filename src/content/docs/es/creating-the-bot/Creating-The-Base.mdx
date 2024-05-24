@@ -1,0 +1,147 @@
+---
+title: Creando la Base
+sidebar:
+  order: 2
+---
+
+import { FileTree, Tabs, TabItem } from "@astrojs/starlight/components";
+
+## Usando Variables de Entorno
+
+Las Variables de Entorno son variables que se declaran fuera del proceso de ejecución, las cuales se declaran con la estructura de Clave/Valor.
+
+Para usar Variables de Entorno en tu código, tendrás que utilizar una variable global llamada `process.env`.
+
+:::danger
+Esta no es una forma segura de establecer tu token, esto es solo un ejemplo de cómo usar Variables de Entorno.
+:::
+
+```js title="Usando la variable process.env" frame="terminal"
+console.log(
+  process.env.DISCORD_TOKEN
+); /* Salida: undefined (Porque no ha sido establecido) */
+
+/*
+  Esto establecerá una nueva propiedad en el objeto env
+  Cuyo nombre será "DISCORD_TOKEN" y su valor será "XXXXXXXXXXXX.XXXXXXXXXXXX"
+*/
+process.env.DISCORD_TOKEN = "XXXXXXXXXXXX.XXXXXXXXXXXX";
+
+console.log(process.env.DISCORD_TOKEN); /* Salida: XXXXXXXXXXXX.XXXXXXXXXXXX */
+```
+
+Para almacenar tu token de forma segura, tendrás que crear un nuevo archivo llamado `.env` en la raíz de tu proyecto.
+
+<FileTree>
+
+- discord-bot
+  - node_modules/
+  - **.env**
+  - package-lock.json
+  - package.json
+
+</FileTree>
+
+```bash title=".env" frame="code"
+DISCORD_TOKEN = "XXXXXXXXXXXX.XXXXXXXXXXXX" # Tu token del bot
+```
+
+:::danger
+El archivo `.env` siempre debe mantenerse privado, ya que es donde almacenamos todas nuestras variables secretas.
+
+Si utilizas git, asegúrate de ignorar este archivo antes de subirlo a GitHub.
+
+```text title=".gitignore" frame="code"
+.env
+```
+
+:::
+
+## Cargando Variables de Entorno
+
+Para cargar las Variables de Entorno, tendrás que usar una dependencia llamada <a href="https://www.npmjs.com/package/dotenv" target="_blank">`dotenv`</a>.
+
+```bash title="Instalando Dotenv" frame="terminal"
+npm install dotenv
+```
+
+Esta dependencia cargará todas las Variables de Entorno desde tu archivo `.env`.
+
+```js title="Usando Dotenv" frame="terminal"
+console.log(
+  process.env.DISCORD_TOKEN
+); /* Salida: undefined (Porque no ha sido cargado) */
+
+/*
+  Esto cargará las variables de entorno almacenadas en nuestro archivo .env
+  Asegúrate de tener esta función en la parte superior de tu archivo principal
+*/
+require("dotenv").config();
+
+console.log(process.env.DISCORD_TOKEN); /* Salida: XXXXXXXXXXXX.XXXXXXXXXXXX */
+```
+
+## Creando el Archivo Principal
+
+Para crear la base de tu bot, tendrás que crear un nuevo archivo llamado `index.js`.
+
+<FileTree>
+
+- discord-bot
+  - node_modules/
+  - .env
+  - **index.js** Archivo principal
+  - package-lock.json
+  - package.json
+
+</FileTree>
+
+```js title="index.js" frame="code" "IMPORTANT" "auth: process.env.DISCORD_TOKEN"
+/* Cargando Variables de Entorno */
+require("dotenv").config();
+
+/* Importando las clases que vamos a usar */
+const { Client } = require("oceanic.js");
+
+/*
+  Creando la instancia del cliente
+
+  IMPORTANTE: En la opción "auth", debemos poner el prefijo "Bot" antes del token, tal como aparece en el ejemplo
+  Si en el valor de la Variable de Entorno "DISCORD_TOKEN" ya tienes el prefijo "Bot", puedes ponerlo como auth: process.env.DISCORD_TOKEN directamente
+*/
+const client = new Client({
+  auth: `Bot ${process.env.DISCORD_TOKEN}`,
+  gateway: {
+    intents: ["GUILDS"] /* Por ahora, usarás el intento GUILDS */,
+  },
+});
+
+/* Conecta el bot a Discord */
+client.connect();
+
+/*
+  Escuchamos el evento "Ready"
+  Cuando el bot esté listo, enviará un mensaje a la consola
+*/
+client.on("ready", () => {
+  console.log(`${client.user.username} se ha conectado a Discord!`);
+});
+
+/*
+  Escuchamos el evento "Error"
+  Si no hay eventos para errores, puede provocar que se lance un UncaughtError, causando que el proceso muera
+*/
+client.on("error", (error) => {
+  console.error(error);
+});
+```
+
+:::note
+Ejecuta el comando `node index.js` en tu terminal para iniciar el proceso de tu bot.
+
+```bash title="Iniciando el proceso de tu bot" frame="terminal"
+node index.js # Salida Esperada: Guide Bot se ha conectado a Discord!
+```
+
+Si aparece un mensaje similar a `[NOMBRE_DE_TU_BOT] se ha conectado a Discord!` en la terminal, significa que tu bot se ha inicializado sin problemas.
+:::
