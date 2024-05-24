@@ -1,0 +1,48 @@
+---
+title: Guía de Oceanic
+template: splash
+hero:
+  tagline: Un compendio de Node.js para una interacción fluida con Discord
+  actions:
+    - text: Introducción
+      link: /home/introduction/
+      icon: right-arrow
+      variant: primary
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+## ¿Por qué Oceanic.js?
+
+<CardGrid>
+  <Card title="Fácil de Usar" icon="approve-check-circle">
+    Oceanic.js es una biblioteca fácil de usar para tus aplicaciones de Discord.
+  </Card>
+  <Card title="Últimas actualizaciones de Discord" icon="rocket">
+    Oceanic.js es una biblioteca que se mantiene actualizada con las últimas actualizaciones de la API de Discord.
+  </Card>
+</CardGrid>
+
+## Ejemplo de Bot de Discord
+
+```js title="index.js" frame="code"
+require("dotenv").config();
+
+const { Client } = require("oceanic.js");
+const client = new Client({
+  auth: `Bot ${process.env.DISCORD_TOKEN}`,
+  gateway: {
+    intents: ["GUILDS"],
+  },
+});
+
+client.connect();
+
+client.on("ready", () => {
+  console.log(`${client.user.username} se ha conectado a Discord!`);
+});
+
+client.on("error", (error) => {
+  console.error(error);
+});
+```
